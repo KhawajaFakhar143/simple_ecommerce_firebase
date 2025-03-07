@@ -23,45 +23,31 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(),
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-        child: BlocListener<ButtonStateCubit,ButtonState>(
+        child: BlocListener<ButtonStateCubit, ButtonState>(
           listener: (context, state) {
-            if (state is ButtonFailureState){
-              var snackbar = SnackBar(content: Text(state.errorMessage),behavior: SnackBarBehavior.floating,);
+            if (state is ButtonFailureState) {
+              var snackbar = SnackBar(
+                content: Text(state.errorMessage),
+                behavior: SnackBarBehavior.floating,
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackbar);
             }
-             if (state is ButtonSuccessState) {
-                AppNavigator.pushAndRemove(context, const HomePage());
-              }
+            if (state is ButtonSuccessState) {
+              AppNavigator.pushAndRemove(context, const HomePage());
+            }
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 20,
             children: [
               _siginText(),
-              const SizedBox(
-                height: 20,
-              ),
               _firstNameField(),
-              const SizedBox(
-                height: 20,
-              ),
               _lastNameField(),
-              const SizedBox(
-                height: 20,
-              ),
               _emailField(),
-              const SizedBox(
-                height: 20,
-              ),
               _passwordField(context),
-              const SizedBox(
-                height: 20,
-              ),
               _continueButton(context),
-              const SizedBox(
-                height: 20,
-              ),
               _createAccount(context)
             ],
           ),

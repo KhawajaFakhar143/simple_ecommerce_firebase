@@ -22,9 +22,9 @@ class AllCategoriesPage extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 10,
             children: [
               _shopByCategories(),
-                const SizedBox(height: 10,),
               _categories()
             ],
           ),

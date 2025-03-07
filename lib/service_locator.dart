@@ -4,6 +4,8 @@ import 'package:simple_ecommerce_firebase/data/auth/repositories/auth_repository
 import 'package:simple_ecommerce_firebase/data/auth/source/auth_firebase_service.dart';
 import 'package:simple_ecommerce_firebase/data/category/repository/category.dart';
 import 'package:simple_ecommerce_firebase/data/category/source/category_firebase_service.dart';
+import 'package:simple_ecommerce_firebase/data/order/repository/order.dart';
+import 'package:simple_ecommerce_firebase/data/order/source/order_firebase_service.dart';
 import 'package:simple_ecommerce_firebase/data/product/repository/product.dart';
 import 'package:simple_ecommerce_firebase/data/product/source/product_firebase_service.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/repositories/auth_repo.dart';
@@ -13,6 +15,12 @@ import 'package:simple_ecommerce_firebase/domain/auth/usescase/siginup.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/signin.dart';
 import 'package:simple_ecommerce_firebase/domain/category/repository/category.dart';
 import 'package:simple_ecommerce_firebase/domain/category/usecases/get_categories.dart';
+import 'package:simple_ecommerce_firebase/domain/order/repository/order.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/add_to_cart.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/get_cart_products.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/get_orders.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/order_registration.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/remove_cart_product.dart';
 import 'package:simple_ecommerce_firebase/domain/product/repository/product.dart';
 import 'package:simple_ecommerce_firebase/domain/product/usecases/add_or_remove_favorite_product.dart';
 import 'package:simple_ecommerce_firebase/domain/product/usecases/get_favorties_products.dart';
@@ -38,6 +46,9 @@ Future<void> initializeDependencies() async {
     ProductFirebaseServiceImpl()
   );
  
+    sl.registerSingleton<OrderFirebaseService>(
+    OrderFirebaseServiceImpl()
+  );
   
 
 
@@ -55,18 +66,30 @@ Future<void> initializeDependencies() async {
     ProductRepositoryImpl()
   );
 
+ 
+    sl.registerSingleton<OrderRepository>(
+    OrderRepositoryImpl()
+  );
+
 
 
   // Usecases
+
 
   sl.registerSingleton<SignupUseCase>(
     SignupUseCase()
   );
 
+
+
   sl.registerSingleton<SigninUseCase>(
     SigninUseCase()
   );
 
+
+  sl.registerSingleton<IsLoggedInUseCase>(
+    IsLoggedInUseCase()
+  );
 
   sl.registerSingleton<GetUserUseCase>(
     GetUserUseCase()
@@ -92,7 +115,25 @@ Future<void> initializeDependencies() async {
     GetProductsByTitleUseCase()
   );
 
+  sl.registerSingleton<AddToCartUseCase>(
+    AddToCartUseCase()
+  );
 
+  sl.registerSingleton<GetCartProductsUseCase>(
+    GetCartProductsUseCase()
+  );
+
+  sl.registerSingleton<RemoveCartProductUseCase>(
+    RemoveCartProductUseCase()
+  );
+
+  sl.registerSingleton<OrderRegistrationUseCase>(
+    OrderRegistrationUseCase()
+  );
+
+  sl.registerSingleton<AddOrRemoveFavoriteProductUseCase>(
+    AddOrRemoveFavoriteProductUseCase()
+  );
 
   sl.registerSingleton<IsFavoriteUseCase>(
     IsFavoriteUseCase()
@@ -102,15 +143,10 @@ Future<void> initializeDependencies() async {
     GetFavortiesProductsUseCase()
   );
 
-   sl.registerSingleton<AddOrRemoveFavoriteProductUseCase>(
-    AddOrRemoveFavoriteProductUseCase()
+  sl.registerSingleton<GetOrdersUseCase>(
+    GetOrdersUseCase()
   );
 
-    sl.registerSingleton<IsLoggedInUseCase>(
-    IsLoggedInUseCase()
-  );
-
-
-
+  
  
 }

@@ -41,23 +41,12 @@ class SigninPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 20,
             children: [
               _siginText(context),
-              const SizedBox(
-                height: 20,
-              ),
               _emailField(context),
-              const SizedBox(
-                height: 20,
-              ),
               _passwordField(context),
-              const SizedBox(
-                height: 20,
-              ),
               _continueButton(context),
-              const SizedBox(
-                height: 20,
-              ),
               _createAccount(context)
             ],
           ),
