@@ -8,6 +8,7 @@ import 'package:simple_ecommerce_firebase/data/product/repository/product.dart';
 import 'package:simple_ecommerce_firebase/data/product/source/product_firebase_service.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/repositories/auth_repo.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/get_user.dart';
+import 'package:simple_ecommerce_firebase/domain/auth/usescase/is_logged_in.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/siginup.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/signin.dart';
 import 'package:simple_ecommerce_firebase/domain/category/repository/category.dart';
@@ -103,6 +104,10 @@ Future<void> initializeDependencies() async {
 
    sl.registerSingleton<AddOrRemoveFavoriteProductUseCase>(
     AddOrRemoveFavoriteProductUseCase()
+  );
+
+    sl.registerSingleton<IsLoggedInUseCase>(
+    IsLoggedInUseCase()
   );
 
 
