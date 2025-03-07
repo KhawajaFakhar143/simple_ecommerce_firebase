@@ -8,6 +8,7 @@ abstract class AuthFirebaseService {
 
   Future<Either> signup(UserCreationReq user);
   Future<Either> signin(UserSigninReq user);
+   Future<Either> getUser();
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -71,6 +72,23 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       }
       
       return Left(message);
+    }
+  }
+
+   @override
+  Future<Either> getUser() async {
+    try {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    var userData = await FirebaseFirestore.instance.collection('Users').doc(
+      currentUser?.uid
+    ).get().then((value) => value.data());
+    return Right(
+      userData
+    );
+    } catch(e) {
+      return const Left(
+        'Please try again'
+      );
     }
   }
 }

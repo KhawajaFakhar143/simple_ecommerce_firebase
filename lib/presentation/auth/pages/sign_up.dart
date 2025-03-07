@@ -9,6 +9,7 @@ import 'package:simple_ecommerce_firebase/common/widgets/buttons/basic_reactive_
 import 'package:simple_ecommerce_firebase/data/auth/models/user_creation_req.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/siginup.dart';
 import 'package:simple_ecommerce_firebase/presentation/auth/pages/sign_in.dart';
+import 'package:simple_ecommerce_firebase/presentation/home/pages/home.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -30,6 +31,9 @@ class SignupPage extends StatelessWidget {
               var snackbar = SnackBar(content: Text(state.errorMessage),behavior: SnackBarBehavior.floating,);
               ScaffoldMessenger.of(context).showSnackBar(snackbar);
             }
+             if (state is ButtonSuccessState) {
+                AppNavigator.pushAndRemove(context, const HomePage());
+              }
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_ecommerce_firebase/core/configs/assets/app_images.dart';
+import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
+import 'package:simple_ecommerce_firebase/domain/auth/entities/user.dart';
+import 'package:simple_ecommerce_firebase/presentation/home/bloc/user_info_display_cubit.dart';
+import 'package:simple_ecommerce_firebase/presentation/home/bloc/user_info_display_state.dart';
+
+class Header extends StatelessWidget {
+  const Header({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => UserInfoDisplayCubit()..displayUserInfo(),
+      child: Padding(
+        padding: const EdgeInsets.only(
+            top: 40,
+            right: 16,
+            left: 16
+          ),
+          child: BlocBuilder < UserInfoDisplayCubit, UserInfoDisplayState > (
+            builder: (context, state) {
+              if (state is UserInfoLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is UserInfoLoaded) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _profileImage(state.user,context),
+                    _gender(state.user),
+                    _card(context)
+                  ],
+                );
+              }
+              return Container();
+            },
+          ),
+      ),
+    );
+  }
+
+  Widget _profileImage(UserEntity user,BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        //TODO: add profile page navigation
+      },
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: (user.image?.isEmpty ?? false) ? 
+            const AssetImage(
+              AppImages.profile
+            ) : NetworkImage(
+              user.image!
+            )
+          ),
+          color: Colors.red,
+          shape: BoxShape.circle
+        ),
+      ),
+    );
+  }
+
+  Widget _gender(UserEntity user) {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.secondBackground,
+        borderRadius: BorderRadius.circular(100)
+      ),
+      child: Center(
+        child: Text(
+           'Men',
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _card(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        //TODO: ADD Cart page navigation
+      },
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: const BoxDecoration(
+          color: AppColors.primary,
+          shape: BoxShape.circle
+        ),
+        child: Icon(Icons.shopping_bag),
+      ),
+    );
+  }
+}
