@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_ecommerce_firebase/common/bloc/button/button_state.dart';
 import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/common/helper/product/product_price.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/buttons/basic_reactive_button.dart';
+import 'package:simple_ecommerce_firebase/data/order/models/add_to_cart_req.dart';
+import 'package:simple_ecommerce_firebase/domain/order/usecases/add_to_cart.dart';
 import 'package:simple_ecommerce_firebase/domain/product/entities/product.dart';
+import 'package:simple_ecommerce_firebase/presentation/cart/pages/cart.dart';
+import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_quantity_cubit.dart';
+import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 
 class AddToBag extends StatelessWidget {
   final ProductEntity productEntity;
@@ -19,7 +25,7 @@ class AddToBag extends StatelessWidget {
     return BlocListener<ButtonStateCubit,ButtonState>(
       listener: (context, state) {
         if (state is ButtonSuccessState) {
-          //TODO: Add Cart page here
+          AppNavigator.push(context, const CartPage());
         } 
         if (state is ButtonFailureState) {
           var snackbar = SnackBar(content: Text(state.errorMessage),behavior: SnackBarBehavior.floating,);
@@ -30,8 +36,19 @@ class AddToBag extends StatelessWidget {
         padding: const EdgeInsets.all(16),
           child: BasicReactiveButton(
             onPressed: () {
-            //TODO: add cart use case here
-            },
+ context.read<ButtonStateCubit>().execute(
+                usecase: AddToCartUseCase(),
+                params: AddToCartReq(
+                  productId: productEntity.productId, 
+                  productTitle: productEntity.title,
+                  productQuantity: context.read<ProductQuantityCubit>().state,
+                  productSize: productEntity.sizes[context.read<ProductSizeSelectionCubit>().selectedIndex],
+                  productPrice: productEntity.price.toDouble(), 
+                  totalPrice: ProductPriceHelper.provideCurrentPrice(productEntity) * context.read<ProductQuantityCubit>().state,
+                  productImage: productEntity.images[0],
+                  createdDate: DateTime.now().toString()
+                )
+             );            },
             content: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

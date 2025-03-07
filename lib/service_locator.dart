@@ -76,7 +76,7 @@ Future<void> initializeDependencies() async {
   // Usecases
 
 
-  sl.registerSingleton<SignupUseCase>(
+   sl.registerSingleton<SignupUseCase>(
     SignupUseCase()
   );
 
@@ -85,6 +85,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SigninUseCase>(
     SigninUseCase()
   );
+
 
 
   sl.registerSingleton<IsLoggedInUseCase>(
@@ -146,7 +147,6 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetOrdersUseCase>(
     GetOrdersUseCase()
   );
-
   
  
 }

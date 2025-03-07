@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_ecommerce_firebase/common/helper/images/image_display.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
 import 'package:simple_ecommerce_firebase/domain/order/entities/product_ordered.dart';
+import 'package:simple_ecommerce_firebase/presentation/cart/bloc/cart_products_display_cubit.dart';
 
-class OrderItemCard extends StatelessWidget {
+
+class ProductOrderedCard extends StatelessWidget {
   final ProductOrderedEntity productOrderedEntity;
-  const OrderItemCard({
+  const ProductOrderedCard({
     required this.productOrderedEntity,
     super.key
     });
@@ -114,13 +117,38 @@ class OrderItemCard extends StatelessWidget {
                 ],
               ),
             ),
-            Text(
-                '\$${productOrderedEntity.totalPrice}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14
-                ),
-              )
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                      '\$${productOrderedEntity.totalPrice}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14
+                      ),
+                    ),
+                     GestureDetector(
+                       onTap: () {
+                        context.read<CartProductsDisplayCubit>().removeProduct(productOrderedEntity);
+                       },
+                       child: Container(
+                         height: 23,
+                         width: 23,
+                         decoration: const BoxDecoration(
+                             color: Color(0xffFF8383),
+                             shape: BoxShape.circle
+                           ),
+                           child: const Icon(
+                             Icons.remove,
+                             size: 15,
+                           ),
+                       ),
+                     )
+                ],
+              ),
+            )
           ],
         ),
     );

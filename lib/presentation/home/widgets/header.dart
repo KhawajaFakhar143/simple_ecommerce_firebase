@@ -4,6 +4,7 @@ import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/core/configs/assets/app_images.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/entities/user.dart';
+import 'package:simple_ecommerce_firebase/presentation/cart/pages/cart.dart';
 import 'package:simple_ecommerce_firebase/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:simple_ecommerce_firebase/presentation/home/bloc/user_info_display_state.dart';
 import 'package:simple_ecommerce_firebase/presentation/settings/pages/settings.dart';
@@ -92,7 +93,7 @@ class Header extends StatelessWidget {
   Widget _card(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        //TODO: ADD Cart page navigation
+       AppNavigator.push(context,const CartPage());
       },
       child: Container(
         height: 40,
