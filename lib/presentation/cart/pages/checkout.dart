@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state_cubit.dart';
 import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/common/helper/cart/cart.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/app_bar/app_bar.dart';
@@ -8,7 +8,7 @@ import 'package:simple_ecommerce_firebase/common/widgets/buttons/basic_reactive_
 import 'package:simple_ecommerce_firebase/data/order/models/order_registration_req.dart';
 import 'package:simple_ecommerce_firebase/domain/order/usecases/order_registration.dart';
 import 'package:simple_ecommerce_firebase/presentation/cart/pages/order_placed.dart';
-import '../../../common/bloc/button/button_state.dart';
+import '../../../common/state_managment/button/button_state.dart';
 import '../../../domain/order/entities/product_ordered.dart';
 
 class CheckOutPage extends StatelessWidget {

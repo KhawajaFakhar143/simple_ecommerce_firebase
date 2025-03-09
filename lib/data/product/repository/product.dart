@@ -17,7 +17,7 @@ class ProductRepositoryImpl extends ProductRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductModel.fromJson(e).toEntity()).toList()
         );
       }
     );
@@ -32,7 +32,7 @@ class ProductRepositoryImpl extends ProductRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductModel.fromJson(e).toEntity()).toList()
         );
       }
     );
@@ -47,7 +47,7 @@ class ProductRepositoryImpl extends ProductRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductModel.fromJson(e).toEntity()).toList()
         );
       }
     );
@@ -62,7 +62,7 @@ class ProductRepositoryImpl extends ProductRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductModel.fromJson(e).toEntity()).toList()
         );
       }
     );
@@ -97,7 +97,7 @@ class ProductRepositoryImpl extends ProductRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductModel.fromJson(e).toEntity()).toList()
         );
       }
     );

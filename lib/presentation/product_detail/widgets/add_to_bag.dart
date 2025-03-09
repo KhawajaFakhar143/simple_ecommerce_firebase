@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state_cubit.dart';
 import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/common/helper/product/product_price.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/buttons/basic_reactive_button.dart';
@@ -9,7 +9,6 @@ import 'package:simple_ecommerce_firebase/data/order/models/add_to_cart_req.dart
 import 'package:simple_ecommerce_firebase/domain/order/usecases/add_to_cart.dart';
 import 'package:simple_ecommerce_firebase/domain/product/entities/product.dart';
 import 'package:simple_ecommerce_firebase/presentation/cart/pages/cart.dart';
-import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_color_selection_cubit.dart';
 import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_quantity_cubit.dart';
 import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/product_size_selection_cubit.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state_cubit.dart';
 import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/app_bar/app_bar.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/buttons/basic_reactive_button.dart';

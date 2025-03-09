@@ -1,57 +1,43 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:simple_ecommerce_firebase/data/order/models/order_status.dart';
+import 'package:simple_ecommerce_firebase/data/order/models/product_ordered.dart';
 import 'package:simple_ecommerce_firebase/domain/order/entities/order.dart';
 
-import 'product_ordered.dart';
+part 'order.g.dart';
 
+@JsonSerializable(explicitToJson: true)
 class OrderModel {
-  final List < ProductOrderedModel > products;
+  final List<ProductOrderedModel> products;
   final String createdDate;
   final String shippingAddress;
   final int itemCount;
   final double totalPrice;
   final String? code;
+  @JsonKey(defaultValue: [])
   final List<OrderStatusModel> orderStatus;
 
   OrderModel({
-    required this.products, 
-    required this.createdDate, 
-    required this.shippingAddress, 
-    required this.itemCount, 
+    required this.products,
+    required this.createdDate,
+    required this.shippingAddress,
+    required this.itemCount,
     required this.totalPrice,
     required this.code,
-    required this.orderStatus
+    required this.orderStatus,
   });
-  
 
- 
-  factory OrderModel.fromMap(Map<String, dynamic> map) {
-    return OrderModel(
-      products: List < ProductOrderedModel >.from(
-        map['products'].map((e) => ProductOrderedModel.fromMap(e))
-      ),
-      createdDate: map['createdDate'] as String,
-      shippingAddress: map['shippingAddress'] as String,
-      itemCount: map['itemCount'] as int,
-      totalPrice: map['totalPrice'] as double,
-      code: map['code'] as String?,
-      orderStatus: map['orderStatus'] != null ? List < OrderStatusModel >.from(
-        map['orderStatus'].map((e) => OrderStatusModel.fromMap(e))
-      ) : [],
-    );
-  }
-
+  factory OrderModel.fromJson(Map<String, dynamic> json) => _$OrderModelFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderModelToJson(this);
 }
 
 extension OrderXModel on OrderModel {
   OrderEntity toEntity() {
     return OrderEntity(
-      products: products.map((e) => e.toEntity()).toList(), 
-      createdDate: createdDate, 
-      shippingAddress: shippingAddress, 
-      itemCount: itemCount, 
-      totalPrice: totalPrice, 
+      products: products.map((e) => e.toEntity()).toList(),
+      createdDate: createdDate,
+      shippingAddress: shippingAddress,
+      itemCount: itemCount,
+      totalPrice: totalPrice,
       code: code ?? "",
       orderStatus: orderStatus.map((e) => e.toEntity()).toList(),
     );

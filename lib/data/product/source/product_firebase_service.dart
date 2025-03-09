@@ -104,7 +104,7 @@ class ProductFirebaseServiceImpl extends ProductFirebaseService {
         await FirebaseFirestore.instance.collection(
           "Users"
         ).doc(user.uid).collection('Favorites').add(
-          product.fromEntity().toMap()
+          product.fromEntity().toJson()
         );
         return const Right(true);
       }

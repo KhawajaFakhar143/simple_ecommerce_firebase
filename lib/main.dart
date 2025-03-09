@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state_cubit.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/theme.dart';
 import 'package:simple_ecommerce_firebase/presentation/splash/bloc/splash_cubit.dart';
 import 'package:simple_ecommerce_firebase/presentation/splash/pages/splash.dart';

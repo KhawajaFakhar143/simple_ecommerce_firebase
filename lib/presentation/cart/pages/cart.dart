@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/app_bar/app_bar.dart';
-import 'package:simple_ecommerce_firebase/presentation/cart/bloc/cart_products_display_cubit.dart';
+import 'package:simple_ecommerce_firebase/presentation/cart/provider/cart_products_display_provider.dart';
 import '../../../domain/order/entities/product_ordered.dart';
-import '../bloc/cart_products_display_state.dart';
 import '../widgets/checkout.dart';
 import '../widgets/product_ordered_card.dart';
 
@@ -14,40 +13,34 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(
-        title: Text(
-          'Cart'
-        ),
+        title: Text('Cart'),
       ),
-      body: BlocProvider(
-        create: (context) => CartProductsDisplayCubit()..displayCartProducts(),
-        child: BlocBuilder<CartProductsDisplayCubit,CartProductsDisplayState>(
-          builder: (context, state) {
-            if (state is CartProductsLoading){
-              return const Center(
-                child: CircularProgressIndicator()
-              );
+      body: ChangeNotifierProvider(
+        create: (context) => CartProductsDisplayProvider()..displayCartProducts(),
+        child: Consumer<CartProductsDisplayProvider>(
+          builder: (context, provider, child) {
+            if (provider.isLoading) {
+              return const Center(child: CircularProgressIndicator());
             }
-            if (state is CartProductsLoaded) {
-              return state.products.isEmpty ? Center(child: _cartIsEmpty()) : Stack(
-                children: [
-                  _products(state.products),
-                   Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Checkout(products: state.products,)
-                  )
-                ],
-              );
-            }
-            if (state is LoadCartProductsFailure) {
+            if (provider.errorMessage != null) {
               return Center(
-                child: Text(
-                  state.errorMessage
-                ),
+                child: Text(provider.errorMessage!),
               );
             }
-            return Container();
+            if (provider.products.isEmpty) {
+              return Center(child: _cartIsEmpty());
+            }
+            return Stack(
+              children: [
+                _products(provider.products),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Checkout(products: provider.products),
+                )
+              ],
+            );
           },
-        ) ,
+        ),
       ),
     );
   }
@@ -57,11 +50,11 @@ class CartPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {
         return ProductOrderedCard(
-          productOrderedEntity: products[index] ,
+          productOrderedEntity: products[index],
         );
       },
-      separatorBuilder: (context, index) => const SizedBox(height: 10,),
-      itemCount: products.length
+      separatorBuilder: (context, index) => const SizedBox(height: 10),
+      itemCount: products.length,
     );
   }
 
@@ -69,16 +62,13 @@ class CartPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.shopify_outlined, color: Colors.white,),
-        const SizedBox(height: 20,),
+        const Icon(Icons.shopify_outlined, color: Colors.white),
+        const SizedBox(height: 20),
         const Text(
           "Cart is empty",
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 20
-          ),
-        )
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+        ),
       ],
     );
   }

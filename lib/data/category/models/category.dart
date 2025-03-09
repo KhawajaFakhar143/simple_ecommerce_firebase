@@ -1,10 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
+import 'package:json_annotation/json_annotation.dart';
 import '../../../domain/category/entity/category.dart';
 
-class CategoryModel {
+part 'category.g.dart';
 
+@JsonSerializable()
+class CategoryModel {
   final String title;
   final String categoryId;
   final String image;
@@ -12,28 +12,11 @@ class CategoryModel {
   CategoryModel({
     required this.title,
     required this.categoryId,
-    required this.image
+    required this.image,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'title': title,
-      'categoryId': categoryId,
-      'image': image,
-    };
-  }
-
-  factory CategoryModel.fromMap(Map<String, dynamic> map) {
-    return CategoryModel(
-      title: map['title'] as String,
-      categoryId: map['categoryId'] as String,
-      image: map['image'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CategoryModel.fromJson(String source) => CategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => _$CategoryModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
 }
 
 extension CategoryXModel on CategoryModel {
@@ -41,7 +24,7 @@ extension CategoryXModel on CategoryModel {
     return CategoryEntity(
       categoryId: categoryId,
       image: image,
-      title: title
+      title: title,
     );
   }
 }

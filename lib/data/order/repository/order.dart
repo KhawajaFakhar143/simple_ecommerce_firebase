@@ -24,7 +24,7 @@ class OrderRepositoryImpl extends OrderRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => ProductOrderedModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => ProductOrderedModel.fromJson(e).toEntity()).toList()
         );
       }
     );
@@ -69,7 +69,7 @@ class OrderRepositoryImpl extends OrderRepository {
       }, 
       (data){
         return Right(
-          List.from(data).map((e) => OrderModel.fromMap(e).toEntity()).toList()
+          List.from(data).map((e) => OrderModel.fromJson(e).toEntity()).toList()
         );
       }
     );

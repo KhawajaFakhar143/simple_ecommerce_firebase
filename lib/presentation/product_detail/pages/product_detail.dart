@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/button/button_state_cubit.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/button/button_state_cubit.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/app_bar/app_bar.dart';
 import 'package:simple_ecommerce_firebase/domain/product/entities/product.dart';
 import 'package:simple_ecommerce_firebase/presentation/product_detail/bloc/favorite_icon_cubit.dart';

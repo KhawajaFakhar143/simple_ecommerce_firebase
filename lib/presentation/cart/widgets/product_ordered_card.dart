@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_ecommerce_firebase/common/helper/images/image_display.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
 import 'package:simple_ecommerce_firebase/domain/order/entities/product_ordered.dart';
-import 'package:simple_ecommerce_firebase/presentation/cart/bloc/cart_products_display_cubit.dart';
+import 'package:simple_ecommerce_firebase/presentation/cart/provider/cart_products_display_provider.dart';
 
 
 class ProductOrderedCard extends StatelessWidget {
@@ -131,7 +131,7 @@ class ProductOrderedCard extends StatelessWidget {
                     ),
                      GestureDetector(
                        onTap: () {
-                        context.read<CartProductsDisplayCubit>().removeProduct(productOrderedEntity);
+                        context.read<CartProductsDisplayProvider>().removeProduct(productOrderedEntity);
                        },
                        child: Container(
                          height: 23,

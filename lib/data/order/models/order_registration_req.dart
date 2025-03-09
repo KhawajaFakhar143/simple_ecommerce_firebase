@@ -22,7 +22,7 @@ class OrderRegistrationReq {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'products': products.map((e) => e.fromEntity().toMap()).toList(),
+      'products': products.map((e) => e.fromEntity().toJson()).toList(),
       'createdDate': createdDate,
       'itemCount': itemCount,
       'totalPrice': totalPrice,

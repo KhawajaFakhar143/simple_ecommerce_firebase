@@ -1,9 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/entities/user.dart';
 
+part 'user.g.dart';
 
+@JsonSerializable()
 class UserModel {
   final String userId;
   final String firstName;
@@ -16,35 +16,11 @@ class UserModel {
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.image,
+    this.image,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'userId': userId,
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'image': image,
-      
-    };
-  }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      userId: map['userId'] as String,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
-      email: map['email'] as String,
-      image: map['image'] ?? '',
-     
-    );
-  }
-  
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
 
 extension UserXModel on UserModel {
@@ -52,9 +28,9 @@ extension UserXModel on UserModel {
     return UserEntity(
       userId: userId,
       firstName: firstName,
-      lastName: lastName, 
-      email: email, 
-      image: image, 
+      lastName: lastName,
+      email: email,
+      image: image,
     );
   }
 }

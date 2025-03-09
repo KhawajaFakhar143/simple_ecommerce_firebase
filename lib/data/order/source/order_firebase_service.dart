@@ -25,7 +25,7 @@ class OrderFirebaseServiceImpl extends OrderFirebaseService {
       await FirebaseFirestore.instance.collection('Users')
       .doc(user!.uid)
       .collection('Cart').add(
-        addToCartReq.toMap()
+        addToCartReq.toJson()
       );
       return const Right(
         'Add to cart was successfully'

@@ -1,5 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:json_annotation/json_annotation.dart';
 
+part 'add_to_cart_req.g.dart';
+
+@JsonSerializable()
 class AddToCartReq {
   final String productId;
   final String productTitle;
@@ -18,20 +21,9 @@ class AddToCartReq {
     required this.productPrice,
     required this.totalPrice,
     required this.productImage,
-    required this.createdDate
+    required this.createdDate,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'productId': productId,
-      'productTitle': productTitle,
-      'productQuantity': productQuantity,
-      'productSize': productSize,
-      'productPrice': productPrice,
-      'totalPrice': totalPrice,
-      'productImage': productImage,
-      'createdDate': createdDate,
-    };
-  }
-
+  factory AddToCartReq.fromJson(Map<String, dynamic> json) => _$AddToCartReqFromJson(json);
+  Map<String, dynamic> toJson() => _$AddToCartReqToJson(this);
 }

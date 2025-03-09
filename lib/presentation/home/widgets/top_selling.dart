@@ -1,51 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/product/products_display_cubit.dart';
-import 'package:simple_ecommerce_firebase/common/bloc/product/products_display_state.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/product/products_display_provider.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/product/product_card.dart';
 import 'package:simple_ecommerce_firebase/domain/product/entities/product.dart';
 import 'package:simple_ecommerce_firebase/domain/product/usecases/get_top_selling.dart';
-import '../../../service_locator.dart';
+import 'package:simple_ecommerce_firebase/service_locator.dart';
 
 class TopSelling extends StatelessWidget {
   const TopSelling({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsDisplayCubit(useCase: sl<GetTopSellingUseCase>())..displayProducts(),
-      child: BlocBuilder < ProductsDisplayCubit, ProductsDisplayState > (
-        builder: (context, state) {
-          if (state is ProductsLoading) {
-            return const CircularProgressIndicator();
+    return ChangeNotifierProvider(
+      create: (context) => ProductsDisplayProvider(useCase: sl<GetTopSellingUseCase>())..displayProducts(),
+      child: Consumer<ProductsDisplayProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading) {
+            return const Center(child: CircularProgressIndicator());
           }
-          if (state is ProductsLoaded) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 20,
-              children: [
-                _topSelling(),
-                _products(state.products)
-              ],
-            );
+          if (provider.errorMessage != null) {
+            return Center(child: Text(provider.errorMessage!));
           }
-          return Container();
+          if (provider.products.isEmpty) {
+            return const Center(child: Text("No top-selling products available"));
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _topSelling(),
+              const SizedBox(height: 20),
+              _products(provider.products),
+            ],
+          );
         },
       ),
     );
   }
 
-   Widget _topSelling() {
+  Widget _topSelling() {
     return const Padding(
-      padding: EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Text(
         'Top Selling',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 16
+          fontSize: 16,
         ),
       ),
     );
@@ -56,18 +55,14 @@ class TopSelling extends StatelessWidget {
       height: 300,
       child: ListView.separated(
         shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-         horizontal: 16,
-       ),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index) {
-          return ProductCard(
-            productEntity: products[index],
-          );
+        itemBuilder: (context, index) {
+          return ProductCard(productEntity: products[index]);
         },
-        separatorBuilder: (context,index) => const SizedBox(width: 10,),
-        itemCount: products.length
-        ),
+        separatorBuilder: (context, index) => const SizedBox(width: 10),
+        itemCount: products.length,
+      ),
     );
   }
 }
