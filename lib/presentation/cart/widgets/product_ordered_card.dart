@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_ecommerce_firebase/common/helper/images/image_display.dart';
+import 'package:simple_ecommerce_firebase/common/widgets/cached_image/cached_image.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
 import 'package:simple_ecommerce_firebase/domain/order/entities/product_ordered.dart';
 import 'package:simple_ecommerce_firebase/presentation/cart/provider/cart_products_display_provider.dart';
@@ -37,16 +38,13 @@ class ProductOrderedCard extends StatelessWidget {
                       width: 90,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(
-                            ImageDisplayHelper.generateProductImageURL(
-                              productOrderedEntity.productImage
-                            )
-                          )
-                        ),
+                        
                         borderRadius: BorderRadius.circular(4)
                       ),
+                       child: CachedNetworkImageWidget(
+                    ImageDisplayHelper.generateProductImageURL(
+                              productOrderedEntity.productImage
+                            ),),
                     ),
                   ),
                   const SizedBox(width: 10, ),

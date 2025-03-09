@@ -4,4 +4,5 @@ class AppImages {
   static const profile = '${basePath}profile.png';
   static const orderPlaced = '${basePath}order_placed.png';
    static const logo = '${basePath}logo.jpg';
+   static const libasLogo = '${basePath}libas_logo.png';
 }

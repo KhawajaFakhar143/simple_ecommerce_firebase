@@ -41,7 +41,9 @@ dependencies:
   dartz:
   get_it:
   provider:
+  cached_network_image:
   json_annotation: ^4.9.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
