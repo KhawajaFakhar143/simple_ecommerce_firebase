@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_ecommerce_firebase/common/helper/app_navigator.dart';
 import 'package:simple_ecommerce_firebase/presentation/auth/pages/sign_in.dart';
 
 void showLogoutDialog(BuildContext context) {
