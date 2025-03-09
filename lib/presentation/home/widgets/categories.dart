@@ -6,6 +6,7 @@ import 'package:simple_ecommerce_firebase/common/helper/images/image_display.dar
 import 'package:simple_ecommerce_firebase/domain/category/entity/category.dart';
 import 'package:simple_ecommerce_firebase/domain/category/usecases/get_categories.dart';
 import 'package:simple_ecommerce_firebase/presentation/all_categories/pages/all_categories.dart';
+import 'package:simple_ecommerce_firebase/presentation/category_products/pages/category_products.dart';
 import 'package:simple_ecommerce_firebase/service_locator.dart';
 
 class Categories extends StatelessWidget {
@@ -72,22 +73,30 @@ class Categories extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                      ImageDisplayHelper.generateCategoryImageURL(
-                        categories[index].image,
+              InkWell(
+                onTap: () {
+                  AppNavigator.push(
+                  context,
+                  CategoryProductsPage(categoryEntity: categories[index]),
+                );
+                },
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                        ImageDisplayHelper.generateCategoryImageURL(
+                          categories[index].image,
+                        ),
                       ),
                     ),
                   ),
+                  
                 ),
-                
               ),
               const SizedBox(height: 10),
               Text(
