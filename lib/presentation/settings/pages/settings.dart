@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_ecommerce_firebase/common/widgets/app_bar/app_bar.dart';
+import 'package:simple_ecommerce_firebase/presentation/settings/widgets/logout_tile.dart';
 import 'package:simple_ecommerce_firebase/presentation/settings/widgets/my_orders_tile.dart';
 
 import '../widgets/my_favorties_tile.dart';
@@ -21,7 +22,9 @@ class SettingsPage extends StatelessWidget {
           children: [
             MyFavortiesTile(),
             SizedBox(height: 15,),
-            MyOrdersTile()
+            MyOrdersTile(),
+            SizedBox(height: 15,),
+            LogoutTile()
           ],
         ),
       ),
