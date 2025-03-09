@@ -35,7 +35,7 @@ class Header extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _profileImage(user, context),
-                  _gender(),
+                  _logo(),
                   _cart(context),
                 ],
               );
@@ -68,24 +68,22 @@ class Header extends StatelessWidget {
     );
   }
 
-  Widget _gender() {
+  Widget _logo() {
     return Container(
-      height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: AppColors.secondBackground,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: const Center(
-        child: Text(
-          'Men',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
+        height: 40,
+        
+        decoration: BoxDecoration(
+          color: AppColors.secondBackground,
+          borderRadius: BorderRadius.circular(100),
         ),
-      ),
-    );
+        child: Center(
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                AppImages.libasLogo,
+                fit: BoxFit.fill,
+              )),
+        ));
   }
 
   Widget _cart(BuildContext context) {
