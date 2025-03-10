@@ -8,6 +8,7 @@ abstract class AuthFirebaseService {
 
   Future<Either> signup(UserCreationReq user);
   Future<Either> signin(UserSigninReq user);
+  Future<Either> updateUser(UserCreationReq user);
    Future<Either> getUser();
     Future<bool> isLoggedIn();
 }
@@ -98,6 +99,29 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       return true;
     } else {
       return false;
+    }
+  }
+  
+  @override
+  Future<Either> updateUser(UserCreationReq user) async{
+     try {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    await FirebaseFirestore.instance.collection('Users').doc(
+      currentUser?.uid
+    ).update( {
+          'firstName' : user.firstName,
+          'lastName' : user.lastName,
+          'email' : user.email,
+          'image' : currentUser?.photoURL,
+          'userId': currentUser?.uid
+        });
+    return Right(
+      "Updated Successfully"
+    );
+    } catch(e) {
+      return const Left(
+        'Please try again'
+      );
     }
   }
 }

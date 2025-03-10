@@ -5,7 +5,7 @@ import 'package:simple_ecommerce_firebase/core/configs/assets/app_images.dart';
 import 'package:simple_ecommerce_firebase/core/configs/themes.dart/colors.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/entities/user.dart';
 import 'package:simple_ecommerce_firebase/presentation/cart/pages/cart.dart';
-import 'package:simple_ecommerce_firebase/presentation/home/provider/user_info_display_provider.dart';
+import 'package:simple_ecommerce_firebase/common/state_managment/user_info_display_provider.dart';
 import 'package:simple_ecommerce_firebase/presentation/settings/pages/settings.dart';
 
 class Header extends StatelessWidget {

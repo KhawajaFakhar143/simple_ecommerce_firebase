@@ -13,6 +13,7 @@ import 'package:simple_ecommerce_firebase/domain/auth/usescase/get_user.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/is_logged_in.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/siginup.dart';
 import 'package:simple_ecommerce_firebase/domain/auth/usescase/signin.dart';
+import 'package:simple_ecommerce_firebase/domain/auth/usescase/update_user.dart';
 import 'package:simple_ecommerce_firebase/domain/category/repository/category.dart';
 import 'package:simple_ecommerce_firebase/domain/category/usecases/get_categories.dart';
 import 'package:simple_ecommerce_firebase/domain/order/repository/order.dart';
@@ -146,6 +147,11 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<GetOrdersUseCase>(
     GetOrdersUseCase()
+  );
+
+
+   sl.registerSingleton<UpdateUserUseCase>(
+    UpdateUserUseCase()
   );
   
  
