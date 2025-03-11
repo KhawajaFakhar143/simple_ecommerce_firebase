@@ -52,7 +52,7 @@ This project uses both **Provider** and **Bloc** to demonstrate versatility:
 ## Demo Video
 To see the application in action, refer to the demo video embedded below:
 
-[![Watch the demo](assets/images/thumbnail.jpg)](https://youtube.com/shorts/wERiAwKhXKE?feature=share)
+[![Watch the demo](https://giphy.com/gifs/nVKqpzzukuAdp9O9bC)](https://youtube.com/shorts/wERiAwKhXKE?feature=share)
 
 ## APK Download
 The APK file is available in the **Tags** section of the repository.
